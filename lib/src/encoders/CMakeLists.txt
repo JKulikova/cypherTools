@@ -3,4 +3,5 @@ target_sources(
         PRIVATE
             NoneEncoder.cpp
             RsaEncoder.cpp
+            LsbEncoder.cpp
 )

@@ -38,7 +38,7 @@ void RsaEncoder::encode(std::istream& in, std::ostream& out){
 }
 
 /*
- * Create open and secret keys and store tem into specified files
+ * Create open and secret keys and store them into specified files
  */
 bool RsaEncoder::createKeys(){
     unsigned int upperBoundary = 2 << (4);
