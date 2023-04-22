@@ -4,6 +4,12 @@
 #include <fstream>
 
 void RsaDecoder::decode(std::istream& in, std::ostream& out) {
+    if (!in.good())
+        throw std::invalid_argument { "input stream is in a bad state" };
+
+    if (!out.good())
+        throw std::invalid_argument { "output stream is in a bad state" };
+
     std::vector<unsigned int> key = get_keys(cypherTools::outputSubdir + secretKey + cypherTools::fileExtension);
 
     std::string cypheredMessage;

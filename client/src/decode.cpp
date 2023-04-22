@@ -13,6 +13,9 @@ namespace {
         if (name == "rsa")
             return std::make_unique<RsaDecoder>();
 
+        if(name == "lsb")
+            return std::make_unique<LsbDecoder>();
+
         throw std::invalid_argument { "unknown algorithm: \"" + std::string { name } + "\"" };
     }
 } // namespace
@@ -34,7 +37,13 @@ void cypherTools::decode(std::span<const std::string> args) {
     if(in.bad())
         throw std::runtime_error { "unable to open input file" };
 
-    std::ofstream out { outputSubdir + std::string("decode-") + params.getFilename(), std::ios_base::binary };
+    std::ofstream out;
+    if(params.getAlgorithm() == "lsb")
+        out = std::ofstream(outputSubdir + std::string("decode-") +
+                params.getFilename() + cypherTools::fileExtension, std::ios_base::binary);
+    else
+        out = std::ofstream(outputSubdir + std::string("decode-") + params.getFilename(), std::ios_base::binary);
+
     if(out.bad())
         throw std::runtime_error { "unable to open output file" };
 

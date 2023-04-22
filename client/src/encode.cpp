@@ -7,12 +7,17 @@
 #include <memory>
 
 namespace {
-    std::unique_ptr<Encoder> createEncoderFromName(std::string_view name) {
+    std::unique_ptr<Encoder> createEncoderFromName(std::string_view name, ParamsParser& params) {
         if (name == "none")
             return std::make_unique<NoneEncoder>();
 
         if (name == "rsa")
             return std::make_unique<RsaEncoder>();
+
+        if(name == "lsb")
+            if(!params.isLsbMessageInputOutputPresent())
+                throw std::invalid_argument { "no message filename specified" };
+            return  std::make_unique<LsbEncoder>(params.getLsbMessageInputOutput());
 
         throw std::invalid_argument { "unknown algorithm: \"" + std::string { name } + "\"" };
     }
@@ -43,7 +48,7 @@ void cypherTools::encode(std::span<const std::string> args) {
               << "    Algorithm: " << algorithm << "\n"
               << "    Filename: " << filename << std::endl;
 
-    std::unique_ptr<Encoder> encoder = createEncoderFromName(algorithm);
+    std::unique_ptr<Encoder> encoder = createEncoderFromName(algorithm, params);
     encoder->encode(in, out);
 
     std::cout << "Successful." << std::endl;

@@ -23,3 +23,8 @@ class RsaDecoder final : public Decoder {
 public:
     void decode(std::istream&, std::ostream&) override;
 };
+
+class LsbDecoder final : public Decoder {
+public:
+    void decode(std::istream&, std::ostream&) override;
+};

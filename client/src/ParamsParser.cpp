@@ -30,6 +30,20 @@ void ParamsParser::setFilename(std::string value){
     filename = std::move(value);
 }
 
+bool ParamsParser::isLsbMessageInputOutputPresent() {
+    return !lsbMessageInputOutput.empty();
+}
+
+std::string ParamsParser::getLsbMessageInputOutput() {
+    return lsbMessageInputOutput;
+}
+
+void ParamsParser::setLsbMessageInputOutput(std::string value) {
+    if(!lsbMessageInputOutput.empty())
+        throw std::logic_error { "multiple values of filename"  };
+    lsbMessageInputOutput = std::move(value);
+}
+
 ParamsParser ParamsParser::parse(std::span<const std::string> args){
     if (args.empty())
         throw std::invalid_argument { "no filename" };
@@ -43,7 +57,10 @@ ParamsParser ParamsParser::parse(std::span<const std::string> args){
         } else if (it->starts_with("-")) {
             throw std::invalid_argument { "unknown option: " + *it };
         } else {
-            params.setFilename(*it);
+            if(!params.isFilenamePresent())
+                params.setFilename(*it);
+            else
+                params.setLsbMessageInputOutput(*it);
         }
     }
 

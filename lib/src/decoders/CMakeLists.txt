@@ -3,4 +3,5 @@ target_sources(
         PRIVATE
             NoneDecoder.cpp
             RsaDecoder.cpp
+            LsbDecoder.cpp
 )

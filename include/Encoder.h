@@ -38,3 +38,11 @@ public:
 
     void encode(std::istream&, std::ostream&) override;
 };
+
+class LsbEncoder final : public Encoder {
+    std::string bmpMessageSource;
+public:
+    explicit LsbEncoder(std::string value);
+
+    void encode(std::istream&, std::ostream&) override;
+};
