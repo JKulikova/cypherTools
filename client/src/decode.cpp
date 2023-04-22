@@ -16,6 +16,9 @@ namespace {
         if(name == "lsb")
             return std::make_unique<LsbDecoder>();
 
+        if(name == "blowfish")
+            return std::make_unique<BlowfishDecoder>();
+
         throw std::invalid_argument { "unknown algorithm: \"" + std::string { name } + "\"" };
     }
 } // namespace

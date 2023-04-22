@@ -4,4 +4,5 @@ target_sources(
             NoneEncoder.cpp
             RsaEncoder.cpp
             LsbEncoder.cpp
+            BlowfishEncoder.cpp
 )
