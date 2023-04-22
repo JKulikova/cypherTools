@@ -46,3 +46,9 @@ public:
 
     void encode(std::istream&, std::ostream&) override;
 };
+
+class BlowfishEncoder final : public Encoder {
+    std::string key = "key";
+public:
+    void encode(std::istream&, std::ostream&) override;
+};

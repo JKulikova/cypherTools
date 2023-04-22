@@ -4,4 +4,5 @@ target_sources(
             NoneDecoder.cpp
             RsaDecoder.cpp
             LsbDecoder.cpp
+            BlowfishDecoder.cpp
 )

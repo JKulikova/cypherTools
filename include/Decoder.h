@@ -28,3 +28,9 @@ class LsbDecoder final : public Decoder {
 public:
     void decode(std::istream&, std::ostream&) override;
 };
+
+class BlowfishDecoder final : public Decoder {
+    std::string key = "key";
+public:
+    void decode(std::istream&, std::ostream&) override;
+};

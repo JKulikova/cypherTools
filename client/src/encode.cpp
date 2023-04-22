@@ -14,10 +14,14 @@ namespace {
         if (name == "rsa")
             return std::make_unique<RsaEncoder>();
 
-        if(name == "lsb")
-            if(!params.isLsbMessageInputOutputPresent())
-                throw std::invalid_argument { "no message filename specified" };
-            return  std::make_unique<LsbEncoder>(params.getLsbMessageInputOutput());
+        if(name == "lsb") {
+            if (!params.isLsbMessageInputOutputPresent())
+                throw std::invalid_argument{"no message filename specified"};
+            return std::make_unique<LsbEncoder>(params.getLsbMessageInputOutput());
+        }
+
+        if(name == "blowfish")
+            return  std::make_unique<BlowfishEncoder>();
 
         throw std::invalid_argument { "unknown algorithm: \"" + std::string { name } + "\"" };
     }
